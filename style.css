@@ -173,3 +173,80 @@ main {
 #close-button:hover {
     background-color: #003366;
 }
+
+
+
+/* Responsividade */
+
+/* Responsividade para telas menores (celulares) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px; /* Reduz o tamanho da fonte */
+        overflow-y: auto; /* Permite scroll vertical se necessário */
+    }
+
+    .card {
+        width: 95%; /* Aumenta a largura do card */
+        max-width: none; /* Remove a limitação de largura máxima */
+        flex-direction: column; /* Alinha os elementos em coluna */
+        padding: 10px; /* Reduz o padding */
+        gap: 10px; /* Reduz o espaço entre os elementos */
+    }
+
+    .card img {
+        max-width: 100%; /* Garante que a imagem ocupe toda a largura */
+        max-height: 50vh; /* Reduz a altura máxima da imagem */
+        margin-bottom: 10px; /* Menor espaçamento inferior */
+    }
+
+    .card p {
+        font-size: 18px; /* Reduz o tamanho da fonte */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    #card-date {
+        font-size: 18px; /* Reduz o tamanho da data */
+        padding: 8px; /* Reduz o padding */
+        border-width: 1.5px; /* Reduz a espessura da borda */
+        max-width: 80%; /* Permite ocupar mais espaço horizontal */
+    }
+
+    header {
+        padding: 10px; /* Reduz o padding do header */
+    }
+
+    .gallery-space img {
+        width: 30px; /* Reduz o tamanho das imagens da galeria */
+        height: 30px;
+    }
+
+    .gallery-space img:hover {
+        transform: scale(5); /* Reduz a ampliação no hover */
+    }
+
+    #close-button {
+        padding: 8px 15px; /* Reduz o tamanho do botão */
+        font-size: 14px; /* Reduz a fonte */
+    }
+}
+
+/* Ajustes extras para telas muito pequenas (até 480px) */
+@media (max-width: 480px) {
+    .card {
+        width: 100%; /* Ocupa toda a largura da tela */
+        padding: 8px;
+    }
+
+    .card img {
+        max-height: 40vh; /* Reduz ainda mais a altura máxima */
+    }
+
+    .card p, #card-date {
+        font-size: 16px; /* Fonte menor */
+    }
+
+    #close-button {
+        font-size: 12px; /* Botão com texto menor */
+        padding: 6px 10px;
+    }
+}
