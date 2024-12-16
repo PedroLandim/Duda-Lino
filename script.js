@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const cardText = document.getElementById("card-text");
   const cardDate = document.getElementById("card-date");
   const closeButton = document.getElementById("close-button");
+  card.style.display = "none"; // Esconde o card inicialmente
 
   closeButton.addEventListener("click", () => {
     card.style.display = "none"; // Esconde o card ao clicar no botão "Fechar"
