@@ -230,6 +230,37 @@ main {
     }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+    .card {
+        width: 80%; /* Ajusta o tamanho do card para tablets */
+        max-width: 800px; /* Limita a largura máxima do card */
+        flex-direction: row; /* Alinha os elementos lado a lado */
+        padding: 15px; /* Ajusta o padding para telas médias */
+        gap: 20px; /* Ajusta o espaço entre imagem e texto */
+    }
+
+    .card img {
+        max-width: 45%; /* Ajusta o tamanho da imagem para caber ao lado do texto */
+        max-height: 60vh; /* Limita a altura da imagem */
+    }
+
+    .card p {
+        font-size: 20px; /* Ajusta o tamanho da fonte */
+    }
+
+    #card-date {
+        font-size: 20px; /* Ajusta o tamanho da data */
+        padding: 10px; /* Aumenta o padding para se ajustar melhor */
+        border-width: 2px; /* Borda um pouco mais espessa */
+    }
+
+    #close-button {
+        padding: 10px 20px; /* Ajusta o tamanho do botão */
+        font-size: 16px; /* Aumenta a fonte do botão */
+    }
+}
+
+
 /* Ajustes extras para telas muito pequenas (até 480px) */
 @media (max-width: 480px) {
     .card {
