@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dy = (Math.random() * 2 - 1) * 2; // Movimento vertical aleatório (-2 a 2)
 
     placedPositions.push({ x, y, img, paused: false, dragging: false }); // Adiciona uma flag `paused` e `dragging`
-    directions.push({ dx: dx * 0.06, dy: dy * 0.06 }); // Reduz a velocidade do movimento
+    directions.push({ dx: dx * 0, dy: dy * 0 }); // Reduz a velocidade do movimento
 
     // Define a posição inicial
     img.style.left = `${x}px`;
