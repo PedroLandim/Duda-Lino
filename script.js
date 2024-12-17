@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const dy = (Math.random() * 2 - 1) * 2; // Movimento vertical aleatório (-2 a 2)
 
     placedPositions.push({ x, y, img, paused: false, dragging: false }); // Adiciona uma flag `paused` e `dragging`
-    directions.push({ dx: dx * 0, dy: dy * 0 }); // Reduz a velocidade do movimento
+    directions.push({ dx: dx * 0.01, dy: dy * 0.01 }); // Reduz a velocidade do movimento
 
     // Define a posição inicial
     img.style.left = `${x}px`;
@@ -125,29 +125,35 @@ document.addEventListener("DOMContentLoaded", function () {
       card.style.display = "block"; // Mostra o card ao clicar na imagem
     });
 
+    
     img.addEventListener("touchstart", (e) => {
-      e.preventDefault();
+      e.preventDefault(); // Evita o comportamento padrão de toque
       const pos = placedPositions.find((pos) => pos.img === img);
       pos.dragging = true;
       pos.paused = true;
       img.style.cursor = "grabbing";
     
-      // Coordenadas iniciais do toque
       const startX = e.touches[0].clientX;
       const startY = e.touches[0].clientY;
     
-      // Coordenadas iniciais da imagem
       const startLeft = pos.x;
       const startTop = pos.y;
     
+      // Variáveis para determinar o movimento
+      let moved = false;
+    
       function onTouchMove(event) {
-        // Atualiza a posição da imagem
         const deltaX = event.touches[0].clientX - startX;
         const deltaY = event.touches[0].clientY - startY;
+    
+        // Detecta se houve movimento significativo
+        if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
+          moved = true;
+        }
+    
         pos.x = startLeft + deltaX;
         pos.y = startTop + deltaY;
     
-        // Mantém a imagem dentro dos limites
         pos.x = Math.max(0, Math.min(galleryWidth - imageSize, pos.x));
         pos.y = Math.max(0, Math.min(galleryHeight - imageSize, pos.y));
     
@@ -158,22 +164,18 @@ document.addEventListener("DOMContentLoaded", function () {
       function onTouchEnd() {
         pos.dragging = false;
         img.style.cursor = "grab";
+    
+        // Se não houve movimento, acionamos o clique
+        if (!moved) {
+          img.click(); // Simula o clique
+        }
+    
         document.removeEventListener("touchmove", onTouchMove);
         document.removeEventListener("touchend", onTouchEnd);
       }
     
       document.addEventListener("touchmove", onTouchMove);
       document.addEventListener("touchend", onTouchEnd);
-    });
-
-    // Adiciona eventos de mouse
-    img.addEventListener("mouseover", () => {
-      placedPositions.find((pos) => pos.img === img).paused = true; // Pausa o movimento
-    });
-
-    img.addEventListener("mouseout", () => {
-      const pos = placedPositions.find((pos) => pos.img === img);
-      if (!pos.dragging) pos.paused = false; // Retoma o movimento se não estiver sendo arrastado
     });
 
     // Adiciona funcionalidade de arrastar
