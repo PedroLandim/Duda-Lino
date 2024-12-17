@@ -191,6 +191,7 @@ main {
         flex-wrap: wrap;
         align-content: flex-start;
         overflow: hidden; /* Impede que as imagens saiam da área visível */
+        padding-bottom: 20px; /* Adiciona espaço na parte inferior para evitar sobreposição com a barra de navegação */
     }
 
     .card {
@@ -203,7 +204,7 @@ main {
 
     .card img {
         max-width: 100%; /* Garante que a imagem ocupe toda a largura */
-        max-height: 50vh; /* Ajusta a altura máxima da imagem */
+        max-height: auto; /* Ajusta a altura máxima da imagem */
         margin-bottom: 15px; /* Ajusta o espaçamento inferior */
     }
 
