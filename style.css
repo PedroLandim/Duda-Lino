@@ -72,6 +72,7 @@ body:after {
     }
 }
 
+
 header {
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.1);
@@ -89,7 +90,7 @@ main {
 .gallery-space {
     position: relative;
     width: 100%;
-    height: 90vh; /* Aumentado para evitar que as imagens sumam na parte de baixo */
+    height: 85%; /* Limita a área de movimento das imagens */
     overflow: hidden; /* Impede que algo saia da área visível */
 }
 
@@ -100,7 +101,7 @@ main {
     border-radius: 50%;
     box-shadow: 0 0.5px 5px rgba(255, 255, 255, 0.8);
     object-fit: cover;
-    transition: transform 0.3s ease-in-out, z-index 0s;
+    transition: transform 0.3s ease-in-out;
 }
 
 .gallery-space img:hover {
@@ -108,47 +109,41 @@ main {
     z-index: 100; /* Garante que a imagem fique acima das outras */
 }
 
-/* Tocar na imagem para trazê-la à frente */
-.gallery-space img:active {
-    transform: scale(12); /* Aplica ampliação */
-    z-index: 100; /* A imagem vai para o topo */
-}
-
-/* Card fixo para imagens ampliadas */
 .card {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
-    max-width: 800px;
+    width: 80%; /* Ajusta o tamanho do card */
+    max-width: 800px; /* Largura ajustada */
     padding: 20px;
-    background-color: #003B85;
+    background-color: #003B85; /* Fundo do card */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; /* Flexbox para alinhamento lado a lado */
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
     z-index: 1000;
     border-radius: 10px;
-    max-height: 90vh;
+    max-height: 90vh; /* Limita a altura do card */
     overflow: hidden;
-    gap: 20px;
+    gap: 20px; /* Espaço entre a imagem e o texto */
 }
 
 .card img {
-    max-width: 100%;
-    max-height: 70vh;
-    height: auto;
+    max-width: 100%; /* A imagem ocupa no máximo 100% da largura do card */
+    max-height: 70vh; /* Limita a altura da imagem para 60% da altura da tela */
+    height: auto; /* Preserva a proporção da imagem */
     border-radius: 10px;
     margin-bottom: 10px;
-    object-fit: contain;
+    object-fit: contain; /* Ajusta a imagem para caber dentro do espaço disponível */
     box-shadow: 5px 5px 15px rgb(0, 0, 0);
+    margin-bottom: 20px;
 }
 
 .card p {
     font-size: 24px;
-    color: #fff;
-    word-wrap: break-word;
+    color: #fff; /* Texto do card em branco para melhor visibilidade */
+    word-wrap: break-word; /* Quebra o texto para evitar estouro dos limites */
 }
 
 #card-date {
@@ -161,8 +156,8 @@ main {
     border: 2px solid #FF5A5F;
     border-radius: 8px;
     background-color: #FFF8F5;
-    max-width: 40%;
-    margin: 0 auto;
+    max-width: 40%; /* Limita a largura */
+    margin: 0 auto; /* Centraliza horizontalmente */
 }
 
 #close-button {
@@ -179,47 +174,71 @@ main {
     background-color: #003366;
 }
 
+
+
 /* Responsividade */
+
+/* Responsividade para telas menores (celulares) */
 @media (max-width: 768px) {
-    .gallery-space img:active {
-        transform: scale(8); /* Aplica ampliação ao tocar */
-        z-index: 100; /* Garante que a imagem fique acima das outras */
-    }
-
-    .gallery-space {
-        height: 85vh; /* Ajusta a altura da galeria para caber melhor na tela */
-    }
-
-    /* Outros ajustes de responsividade */
     body {
-        font-size: 16px;
-        overflow-y: hidden;
+        font-size: 16px; /* Ajusta o tamanho da fonte */
+        overflow-y: hidden; /* Impede rolagem vertical excessiva */
+    }
+
+      .gallery-space {
+        height: 80%; /* Ajusta a altura da galeria */
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        overflow: hidden; /* Impede que as imagens saiam da área visível */
     }
 
     .card {
-        width: 50%;
-        padding: 15px;
-        flex-direction: column;
-        gap: 15px;
+        width: 90%; /* Ajusta o tamanho do card para celulares */
+        max-width: none; /* Remove a limitação de largura máxima */
+        flex-direction: column; /* Alinha os elementos em coluna */
+        padding: 15px; /* Ajusta o padding */
+        gap: 15px; /* Ajusta o espaço entre os elementos */
     }
 
     .card img {
-        max-width: 100%;
-        max-height: 50vh;
+        max-width: 100%; /* Garante que a imagem ocupe toda a largura */
+        max-height: 50vh; /* Ajusta a altura máxima da imagem */
+        margin-bottom: 15px; /* Ajusta o espaçamento inferior */
+    }
+
+    .card p {
+        font-size: 20px; /* Ajusta o tamanho da fonte */
+        text-align: center; /* Centraliza o texto */
+    }
+
+    .gallery-space img:active {
+        z-index: 100; /* Garante que a imagem fique acima das outras */
+    }
+
+    #card-date {
+        font-size: 20px; /* Ajusta o tamanho da data */
+        padding: 10px; /* Ajusta o padding */
+        border-width: 2px; /* Ajusta a espessura da borda */
+        max-width: 90%; /* Permite ocupar mais espaço horizontal */
+    }
+
+    header {
+        padding: 15px; /* Ajusta o padding do header */
     }
 
     .gallery-space img {
-        width: 34px;
+        width: 34px; /* Ajusta o tamanho das imagens da galeria */
         height: 34px;
     }
 
     .gallery-space img:hover {
-        transform: scale(12);
+        transform: scale(12); /* Ajusta a ampliação no hover */
     }
 
     #close-button {
-        padding: 10px 20px;
-        font-size: 16px;
+        padding: 10px 20px; /* Ajusta o tamanho do botão */
+        font-size: 16px; /* Ajusta a fonte */
     }
 }
 
@@ -262,4 +281,7 @@ main {
         z-index: 100;
     }
 }
+
+/* Responsividade para telas maiores (desktops) */
+
 
