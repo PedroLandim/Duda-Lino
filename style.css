@@ -204,6 +204,10 @@ main {
         text-align: center; /* Centraliza o texto */
     }
 
+    .gallery-space img:active {
+        z-index: 100; /* Garante que a imagem fique acima das outras */
+    }
+
     #card-date {
         font-size: 20px; /* Ajusta o tamanho da data */
         padding: 10px; /* Ajusta o padding */
