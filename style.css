@@ -181,7 +181,7 @@ main {
 /* Responsividade para telas menores (celulares) */
 @media (max-width: 768px) {
     body {
-        font-size: 16px; /* Ajusta o tamanho da fonte */
+        font-size: 90px; /* Ajusta o tamanho da fonte */
         overflow-y: hidden; /* Impede rolagem vertical excessiva */
     }
 
@@ -208,7 +208,7 @@ main {
     }
 
     .card p {
-        font-size: 20px; /* Ajusta o tamanho da fonte */
+        font-size: 100px; /* Ajusta o tamanho da fonte */
         text-align: center; /* Centraliza o texto */
     }
 
