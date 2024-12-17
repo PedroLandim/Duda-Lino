@@ -186,7 +186,7 @@ main {
     }
 
     .card {
-        width: 80%;
+        width: 50%;
         max-width: none; /* Remove a limitação de largura máxima */
         flex-direction: column; /* Alinha os elementos em coluna */
         padding: 15px; /* Ajusta o padding */
