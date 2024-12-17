@@ -6,17 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Cálculo dos meses
   const months = differenceInMonths(now, startDate);
-
-  // Adicionar os meses ao startDate para calcular os dias restantes
   const dateAfterMonths = addMonths(startDate, months);
   const days = differenceInDays(now, dateAfterMonths);
 
-  // Atualizar o texto na página
   document.getElementById("time-together").innerText =
-    `Estamos juntos há ${months} meses e ${days} dias!`;
+    `Juntinhos há ${months} meses e ${days} dias!`;
 
-
-    // Lista de imagens com seus textos
+  // Lista de imagens
   const imageDetails = [
     { src: "img/img1.jpeg", date:"16/01/2024", text: "Nossa primeira foto juntos" },
     { src: "img/img2.jpeg", text: "Lembra dessa viagem incrível?" },
@@ -67,32 +63,28 @@ document.addEventListener("DOMContentLoaded", function () {
     { src: "img/img47.jpeg", text: "Nosso primeiro aniversário juntos!" },
   ];
 
+
   const gallerySpace = document.querySelector(".gallery-space");
-  const imageSize = 50; // Tamanho fixo das imagens
+  const imageSize = 50;
   const placedPositions = [];
   const directions = [];
 
-  // Elementos do card
   const card = document.getElementById("image-card");
   const cardImage = document.getElementById("card-image");
   const cardText = document.getElementById("card-text");
   const cardDate = document.getElementById("card-date");
   const closeButton = document.getElementById("close-button");
-  card.style.display = "none"; // Esconde o card inicialmente
+  card.style.display = "none";
 
-  closeButton.addEventListener("click", () => {
-    card.style.display = "none"; // Esconde o card ao clicar no botão "Fechar"
-  });
+  closeButton.addEventListener("click", () => card.style.display = "none");
 
-  // Obtém as dimensões da área da galeria
   const galleryRect = gallerySpace.getBoundingClientRect();
   const galleryWidth = galleryRect.width;
   const galleryHeight = galleryRect.height;
 
-  // Função para verificar colisões entre duas áreas
   function isColliding(x1, y1, x2, y2, size) {
     const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-    return distance < size; // Considera colisão se a distância for menor que o tamanho da imagem
+    return distance < size;
   }
 
   imageDetails.forEach(({ src, date, text }, index) => {
@@ -100,31 +92,20 @@ document.addEventListener("DOMContentLoaded", function () {
     img.src = src;
     img.alt = "Foto do casal";
 
-    // Gera uma posição inicial aleatória
     const x = Math.random() * (galleryWidth - imageSize);
     const y = Math.random() * (galleryHeight - imageSize);
+    const dx = (Math.random() * 2 - 1) * 2;
+    const dy = (Math.random() * 2 - 1) * 2;
 
-    // Gera uma direção inicial aleatória
-    const dx = (Math.random() * 2 - 1) * 2; // Movimento horizontal aleatório (-2 a 2)
-    const dy = (Math.random() * 2 - 1) * 2; // Movimento vertical aleatório (-2 a 2)
+    placedPositions.push({ x, y, img, paused: false, dragging: false });
+    directions.push({ dx: dx * 0.01, dy: dy * 0.01 });
 
-    placedPositions.push({ x, y, img, paused: false, dragging: false }); // Adiciona uma flag `paused` e `dragging`
-    directions.push({ dx: dx * 0.01, dy: dy * 0.01 }); // Reduz a velocidade do movimento
-
-    // Define a posição inicial
     img.style.left = `${x}px`;
     img.style.top = `${y}px`;
     img.style.position = "absolute";
     img.style.cursor = "grab";
 
-    // Adiciona evento de clique para exibir o card
-    img.addEventListener("click", () => {
-      cardImage.src = src;
-      cardText.innerText = text; // Define o texto específico para cada imagem
-      cardDate.innerText = date;
-      card.style.display = "block"; // Mostra o card ao clicar na imagem
-    });
-
+    let isDragging = false;
 
     img.addEventListener("touchstart", (e) => {
       e.preventDefault();
@@ -178,40 +159,26 @@ document.addEventListener("DOMContentLoaded", function () {
       document.addEventListener("touchend", onTouchEnd);
     });
 
-    // Adiciona funcionalidade de arrastar
     img.addEventListener("mousedown", (e) => {
       e.preventDefault();
-      const pos = placedPositions.find((pos) => pos.img === img);
-      pos.dragging = true;
-      pos.paused = true;
-      img.style.cursor = "grabbing";
-
-      // Coordenadas iniciais do mouse
+      const pos = placedPositions.find((p) => p.img === img);
       const startX = e.clientX;
       const startY = e.clientY;
-
-      // Coordenadas iniciais da imagem
       const startLeft = pos.x;
       const startTop = pos.y;
+      isDragging = false;
 
       function onMouseMove(event) {
-        // Atualiza a posição da imagem
+        isDragging = true;
         const deltaX = event.clientX - startX;
         const deltaY = event.clientY - startY;
-        pos.x = startLeft + deltaX;
-        pos.y = startTop + deltaY;
-
-        // Mantém a imagem dentro dos limites
-        pos.x = Math.max(0, Math.min(galleryWidth - imageSize, pos.x));
-        pos.y = Math.max(0, Math.min(galleryHeight - imageSize, pos.y));
-
+        pos.x = Math.max(0, Math.min(galleryWidth - imageSize, startLeft + deltaX));
+        pos.y = Math.max(0, Math.min(galleryHeight - imageSize, startTop + deltaY));
         img.style.left = `${pos.x}px`;
         img.style.top = `${pos.y}px`;
       }
 
       function onMouseUp() {
-        pos.dragging = false;
-        img.style.cursor = "grab";
         document.removeEventListener("mousemove", onMouseMove);
         document.removeEventListener("mouseup", onMouseUp);
       }
@@ -220,30 +187,31 @@ document.addEventListener("DOMContentLoaded", function () {
       document.addEventListener("mouseup", onMouseUp);
     });
 
+    img.addEventListener("click", () => {
+      if (!isDragging) {
+        cardImage.src = src;
+        cardText.innerText = text;
+        cardDate.innerText = date || "";
+        card.style.display = "block";
+      }
+    });
+
     gallerySpace.appendChild(img);
   });
 
-
-  // Atualiza a posição das imagens em um intervalo
   function moveImages() {
     placedPositions.forEach((pos, i) => {
       const dir = directions[i];
-
-      // Ignora imagens pausadas ou arrastadas
       if (pos.paused || pos.dragging) return;
 
-      // Atualiza a posição
       pos.x += dir.dx;
       pos.y += dir.dy;
 
-      // Detecta colisões com as bordas
       if (pos.x <= 0 || pos.x >= galleryWidth - imageSize) dir.dx *= -1;
       if (pos.y <= 0 || pos.y >= galleryHeight - imageSize) dir.dy *= -1;
 
-      // Detecta colisões entre imagens
-      placedPositions.forEach((otherPos, j) => {
-        if (i !== j && isColliding(pos.x, pos.y, otherPos.x, otherPos.y, imageSize)) {
-          // Inverte as direções das imagens que colidiram
+      placedPositions.forEach((other, j) => {
+        if (i !== j && isColliding(pos.x, pos.y, other.x, other.y, imageSize)) {
           dir.dx *= -1;
           dir.dy *= -1;
           directions[j].dx *= -1;
@@ -251,12 +219,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // Atualiza as posições no DOM
       pos.img.style.left = `${pos.x}px`;
       pos.img.style.top = `${pos.y}px`;
     });
   }
 
-  // Inicia o intervalo para movimentar as imagens
-  setInterval(moveImages, 1);
+  setInterval(moveImages, 10);
 });
