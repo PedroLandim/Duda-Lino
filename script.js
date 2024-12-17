@@ -127,29 +127,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     img.addEventListener("touchstart", (e) => {
-      e.preventDefault(); // Evita o comportamento padrão de toque
-      img.style.transform = "scale(7)"; // Aumenta a escala da imagem
+      e.preventDefault();
+      img.style.transform = "scale(7)"; // Amplia a imagem
+      img.style.zIndex = "1000"; // Eleva a imagem acima das outras
+      
       const pos = placedPositions.find((pos) => pos.img === img);
       pos.dragging = true;
       pos.paused = true;
-      img.style.cursor = "grabbing";
-      
     
       const startX = e.touches[0].clientX;
       const startY = e.touches[0].clientY;
     
       const startLeft = pos.x;
       const startTop = pos.y;
-      
     
-      // Variáveis para determinar o movimento
       let moved = false;
     
       function onTouchMove(event) {
         const deltaX = event.touches[0].clientX - startX;
         const deltaY = event.touches[0].clientY - startY;
     
-        // Detecta se houve movimento significativo
         if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
           moved = true;
         }
@@ -166,12 +163,11 @@ document.addEventListener("DOMContentLoaded", function () {
     
       function onTouchEnd() {
         pos.dragging = false;
-        img.style.cursor = "grab";
         img.style.transform = "scale(1)"; // Restaura o tamanho original
+        img.style.zIndex = "1"; // Restaura o z-index original
     
-        // Se não houve movimento, acionamos o clique
         if (!moved) {
-          img.click(); // Simula o clique
+          img.click();
         }
     
         document.removeEventListener("touchmove", onTouchMove);
