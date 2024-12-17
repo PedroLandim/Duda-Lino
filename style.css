@@ -213,10 +213,6 @@ main {
         text-align: center; /* Centraliza o texto */
     }
 
-    .gallery-space img:active {
-        z-index: 100; /* Garante que a imagem fique acima das outras */
-    }
-
     #card-date {
         font-size: 20px; /* Ajusta o tamanho da data */
         padding: 10px; /* Ajusta o padding */
@@ -235,6 +231,7 @@ main {
 
     .gallery-space img:hover {
         transform: scale(12); /* Ajusta a ampliação no hover */
+        z-index: 100;
     }
 
     #close-button {
