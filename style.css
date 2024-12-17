@@ -262,6 +262,14 @@ main {
     }
 }
 
+/* Para dispositivos móveis */
+@media (max-width: 768px) {
+    .gallery-space img:active {
+        transform: scale(8); /* Aplica ampliação quando a imagem é tocada */
+        z-index: 100;
+    }
+}
+
 /* Responsividade para telas maiores (desktops) */
 
 

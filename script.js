@@ -125,19 +125,22 @@ document.addEventListener("DOMContentLoaded", function () {
       card.style.display = "block"; // Mostra o card ao clicar na imagem
     });
 
-    
+
     img.addEventListener("touchstart", (e) => {
       e.preventDefault(); // Evita o comportamento padrão de toque
+      img.style.transform = "scale(7)"; // Aumenta a escala da imagem
       const pos = placedPositions.find((pos) => pos.img === img);
       pos.dragging = true;
       pos.paused = true;
       img.style.cursor = "grabbing";
+      
     
       const startX = e.touches[0].clientX;
       const startY = e.touches[0].clientY;
     
       const startLeft = pos.x;
       const startTop = pos.y;
+      
     
       // Variáveis para determinar o movimento
       let moved = false;
@@ -164,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
       function onTouchEnd() {
         pos.dragging = false;
         img.style.cursor = "grab";
+        img.style.transform = "scale(1)"; // Restaura o tamanho original
     
         // Se não houve movimento, acionamos o clique
         if (!moved) {
