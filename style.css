@@ -185,6 +185,11 @@ main {
         overflow-y: hidden; /* Impede rolagem vertical excessiva */
     }
 
+    .gallery-space {
+        height: 85vh; /* Limita a altura da galeria, garantindo que não ultrapasse a altura da tela */
+        overflow: hidden; /* Impede que as imagens saiam da área visível */
+    }
+
     .card {
         width: 50%;
         max-width: none; /* Remove a limitação de largura máxima */
