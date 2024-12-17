@@ -186,7 +186,7 @@ main {
     }
 
     .card {
-        width: 90%; /* Ajusta a largura do card */
+        width: 80%;
         max-width: none; /* Remove a limitação de largura máxima */
         flex-direction: column; /* Alinha os elementos em coluna */
         padding: 15px; /* Ajusta o padding */
@@ -221,7 +221,7 @@ main {
     }
 
     .gallery-space img:hover {
-        transform: scale(7); /* Ajusta a ampliação no hover */
+        transform: scale(12); /* Ajusta a ampliação no hover */
     }
 
     #close-button {
