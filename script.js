@@ -125,6 +125,47 @@ document.addEventListener("DOMContentLoaded", function () {
       card.style.display = "block"; // Mostra o card ao clicar na imagem
     });
 
+    img.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      const pos = placedPositions.find((pos) => pos.img === img);
+      pos.dragging = true;
+      pos.paused = true;
+      img.style.cursor = "grabbing";
+    
+      // Coordenadas iniciais do toque
+      const startX = e.touches[0].clientX;
+      const startY = e.touches[0].clientY;
+    
+      // Coordenadas iniciais da imagem
+      const startLeft = pos.x;
+      const startTop = pos.y;
+    
+      function onTouchMove(event) {
+        // Atualiza a posição da imagem
+        const deltaX = event.touches[0].clientX - startX;
+        const deltaY = event.touches[0].clientY - startY;
+        pos.x = startLeft + deltaX;
+        pos.y = startTop + deltaY;
+    
+        // Mantém a imagem dentro dos limites
+        pos.x = Math.max(0, Math.min(galleryWidth - imageSize, pos.x));
+        pos.y = Math.max(0, Math.min(galleryHeight - imageSize, pos.y));
+    
+        img.style.left = `${pos.x}px`;
+        img.style.top = `${pos.y}px`;
+      }
+    
+      function onTouchEnd() {
+        pos.dragging = false;
+        img.style.cursor = "grab";
+        document.removeEventListener("touchmove", onTouchMove);
+        document.removeEventListener("touchend", onTouchEnd);
+      }
+    
+      document.addEventListener("touchmove", onTouchMove);
+      document.addEventListener("touchend", onTouchEnd);
+    });
+
     // Adiciona eventos de mouse
     img.addEventListener("mouseover", () => {
       placedPositions.find((pos) => pos.img === img).paused = true; // Pausa o movimento
