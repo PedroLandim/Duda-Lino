@@ -43,7 +43,7 @@ main {
 }
 
 .gallery-space img:hover {
-    transform: scale(12); /* Ampliar no hover */
+    transform: scale(20); /* Ampliar no hover */
     z-index: 100; /* Garante que a imagem fique acima das outras */
 }
 
