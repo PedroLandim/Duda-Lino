@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Lista de imagens
   const imageDetails = [
-    { src: "img/img1.jpeg", date:"15 de Maio 2024", text: "Nossa primeira foto juntos, no Laguinho" },
+    { src: "img/img1.jpeg", date: "15 de Maio 2024", text: "Nossa primeira foto juntos, no Laguinho" },
     { src: "img/img2.jpeg", text: "Lembra dessa viagem incrível?" },
     { src: "img/img3.jpeg", text: "Essa foi uma noite especial para nós dois." },
     { src: "img/img4.jpeg", text: "Um dia cheio de risadas e diversão." },
@@ -62,11 +62,11 @@ document.addEventListener("DOMContentLoaded", function () {
     { src: "img/img47.jpeg", text: "Nosso primeiro aniversário juntos!" },
   ];
 
-
   const gallerySpace = document.querySelector(".gallery-space");
   const imageSize = 50;
   const placedPositions = [];
   const directions = [];
+  const heartButton = document.getElementById("heart-button");
 
   const card = document.getElementById("image-card");
   const cardImage = document.getElementById("card-image");
@@ -81,147 +81,250 @@ document.addEventListener("DOMContentLoaded", function () {
   const galleryWidth = galleryRect.width;
   const galleryHeight = galleryRect.height;
 
-  function isColliding(x1, y1, x2, y2, size) {
-    const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-    return distance < size;
-  }
+  let isDynamicLayout = true; // Variável para alternar entre os layouts
 
-  imageDetails.forEach(({ src, date, text }, index) => {
-    const img = document.createElement("img");
-    img.src = src;
-    img.alt = "Foto do casal";
+  function initializeDynamicGallery() {
+    gallerySpace.innerHTML = ""; // Limpa a galeria
+    function isColliding(x1, y1, x2, y2, size) {
+      const distance = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+      return distance < size;
+    }
 
-    const x = Math.random() * (galleryWidth - imageSize);
-    const y = Math.random() * (galleryHeight - imageSize);
-    const dx = (Math.random() * 2 - 1) * 2;
-    const dy = (Math.random() * 2 - 1) * 2;
+    imageDetails.forEach(({ src, date, text }, index) => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = "Foto do casal";
 
-    placedPositions.push({ x, y, img, paused: false, dragging: false });
-    directions.push({ dx: dx * 0.01, dy: dy * 0.01 });
+      const x = Math.random() * (galleryWidth - imageSize);
+      const y = Math.random() * (galleryHeight - imageSize);
+      const dx = (Math.random() * 2 - 1) * 2;
+      const dy = (Math.random() * 2 - 1) * 2;
 
-    img.style.left = `${x}px`;
-    img.style.top = `${y}px`;
-    img.style.position = "absolute";
-    img.style.cursor = "grab";
+      placedPositions.push({ x, y, img, paused: false, dragging: false });
+      directions.push({ dx: dx * 0.01, dy: dy * 0.01 });
 
-    let isDragging = false;
+      img.style.left = `${x}px`;
+      img.style.top = `${y}px`;
+      img.style.position = "absolute";
+      img.style.cursor = "grab";
 
-    img.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      img.style.transform = "scale(7)"; // Amplia a imagem
-      img.style.zIndex = "1000"; // Eleva a imagem acima das outras
-      
-      const pos = placedPositions.find((pos) => pos.img === img);
-      pos.dragging = true;
-      pos.paused = true;
-    
-      const startX = e.touches[0].clientX;
-      const startY = e.touches[0].clientY;
-    
-      const startLeft = pos.x;
-      const startTop = pos.y;
-    
-      let moved = false;
-    
-      function onTouchMove(event) {
-        const deltaX = event.touches[0].clientX - startX;
-        const deltaY = event.touches[0].clientY - startY;
-    
-        if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
-          moved = true;
+      let isDragging = false;
+
+      img.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        img.style.transform = "scale(8)"; // Amplia a imagem
+        img.style.zIndex = "1000"; // Eleva a imagem acima das outras
+
+        const pos = placedPositions.find((pos) => pos.img === img);
+        pos.dragging = true;
+        pos.paused = true;
+
+        const startX = e.touches[0].clientX;
+        const startY = e.touches[0].clientY;
+
+        const startLeft = pos.x;
+        const startTop = pos.y;
+
+        let moved = false;
+
+        function onTouchMove(event) {
+          const deltaX = event.touches[0].clientX - startX;
+          const deltaY = event.touches[0].clientY - startY;
+
+          if (Math.abs(deltaX) > 10 || Math.abs(deltaY) > 10) {
+            moved = true;
+          }
+
+          pos.x = startLeft + deltaX;
+          pos.y = startTop + deltaY;
+
+          pos.x = Math.max(0, Math.min(galleryWidth - imageSize, pos.x));
+          pos.y = Math.max(0, Math.min(galleryHeight - imageSize, pos.y));
+
+          img.style.left = `${pos.x}px`;
+          img.style.top = `${pos.y}px`;
         }
-    
-        pos.x = startLeft + deltaX;
-        pos.y = startTop + deltaY;
-    
-        pos.x = Math.max(0, Math.min(galleryWidth - imageSize, pos.x));
-        pos.y = Math.max(0, Math.min(galleryHeight - imageSize, pos.y));
-    
-        img.style.left = `${pos.x}px`;
-        img.style.top = `${pos.y}px`;
-      }
-    
-      function onTouchEnd() {
-        pos.dragging = false;
-        img.style.transform = "scale(1)"; // Restaura o tamanho original
-        img.style.zIndex = "1"; // Restaura o z-index original
-    
-        if (!moved) {
-          img.click();
+
+        function onTouchEnd() {
+          pos.dragging = false;
+          img.style.transform = "scale(1)"; // Restaura o tamanho original
+          img.style.zIndex = "1"; // Restaura o z-index original
+
+          if (!moved) {
+            img.click();
+          }
+
+          document.removeEventListener("touchmove", onTouchMove);
+          document.removeEventListener("touchend", onTouchEnd);
         }
-    
-        document.removeEventListener("touchmove", onTouchMove);
-        document.removeEventListener("touchend", onTouchEnd);
-      }
-    
-      document.addEventListener("touchmove", onTouchMove);
-      document.addEventListener("touchend", onTouchEnd);
-    });
 
-    img.addEventListener("mousedown", (e) => {
-      e.preventDefault();
-      const pos = placedPositions.find((p) => p.img === img);
-      const startX = e.clientX;
-      const startY = e.clientY;
-      const startLeft = pos.x;
-      const startTop = pos.y;
-      isDragging = false;
+        document.addEventListener("touchmove", onTouchMove);
+        document.addEventListener("touchend", onTouchEnd);
+      });
 
-      function onMouseMove(event) {
-        isDragging = true;
-        const deltaX = event.clientX - startX;
-        const deltaY = event.clientY - startY;
-        pos.x = Math.max(0, Math.min(galleryWidth - imageSize, startLeft + deltaX));
-        pos.y = Math.max(0, Math.min(galleryHeight - imageSize, startTop + deltaY));
-        img.style.left = `${pos.x}px`;
-        img.style.top = `${pos.y}px`;
-      }
+      img.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        const pos = placedPositions.find((p) => p.img === img);
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startLeft = pos.x;
+        const startTop = pos.y;
+        isDragging = false;
 
-      function onMouseUp() {
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", onMouseUp);
-      }
+        function onMouseMove(event) {
+          isDragging = true;
+          const deltaX = event.clientX - startX;
+          const deltaY = event.clientY - startY;
+          pos.x = Math.max(0, Math.min(galleryWidth - imageSize, startLeft + deltaX));
+          pos.y = Math.max(0, Math.min(galleryHeight - imageSize, startTop + deltaY));
+          img.style.left = `${pos.x}px`;
+          img.style.top = `${pos.y}px`;
+        }
 
-      document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseup", onMouseUp);
-    });
+        function onMouseUp() {
+          document.removeEventListener("mousemove", onMouseMove);
+          document.removeEventListener("mouseup", onMouseUp);
+        }
 
-    img.addEventListener("click", () => {
-      if (!isDragging) {
-        cardImage.src = src;
-        cardText.innerText = text;
-        cardDate.innerText = date || "";
-        card.style.display = "block";
-      }
-    });
+        document.addEventListener("mousemove", onMouseMove);
+        document.addEventListener("mouseup", onMouseUp);
+      });
 
-    gallerySpace.appendChild(img);
-  });
-
-  function moveImages() {
-    placedPositions.forEach((pos, i) => {
-      const dir = directions[i];
-      if (pos.paused || pos.dragging) return;
-
-      pos.x += dir.dx;
-      pos.y += dir.dy;
-
-      if (pos.x <= 0 || pos.x >= galleryWidth - imageSize) dir.dx *= -1;
-      if (pos.y <= 0 || pos.y >= galleryHeight - imageSize) dir.dy *= -1;
-
-      placedPositions.forEach((other, j) => {
-        if (i !== j && isColliding(pos.x, pos.y, other.x, other.y, imageSize)) {
-          dir.dx *= -1;
-          dir.dy *= -1;
-          directions[j].dx *= -1;
-          directions[j].dy *= -1;
+      img.addEventListener("click", () => {
+        if (!isDragging) {
+          cardImage.src = src;
+          cardText.innerText = text;
+          cardDate.innerText = date || "";
+          card.style.display = "block";
         }
       });
 
-      pos.img.style.left = `${pos.x}px`;
-      pos.img.style.top = `${pos.y}px`;
+      gallerySpace.appendChild(img);
     });
+
+    function moveImages() {
+      placedPositions.forEach((pos, i) => {
+        const dir = directions[i];
+        if (pos.paused || pos.dragging) return;
+
+        pos.x += dir.dx;
+        pos.y += dir.dy;
+
+        if (pos.x <= 0 || pos.x >= galleryWidth - imageSize) dir.dx *= -1;
+        if (pos.y <= 0 || pos.y >= galleryHeight - imageSize) dir.dy *= -1;
+
+        placedPositions.forEach((other, j) => {
+          if (i !== j && isColliding(pos.x, pos.y, other.x, other.y, imageSize)) {
+            dir.dx *= -1;
+            dir.dy *= -1;
+            directions[j].dx *= -1;
+            directions[j].dy *= -1;
+          }
+        });
+
+        pos.img.style.left = `${pos.x}px`;
+        pos.img.style.top = `${pos.y}px`;
+      });
+    }
+
+    setInterval(moveImages, 10);
   }
 
-  setInterval(moveImages, 10);
-});
+  function initializeStaticGallery() {
+      gallerySpace.innerHTML = ""; // Limpa a galeria
+  
+      // Ordena as imagens pela data
+      imageDetails.sort((a, b) => new Date(a.date) - new Date(b.date));
+      // Remove todas as imagens da galeria
+      while (gallerySpace.firstChild) {
+        gallerySpace.removeChild(gallerySpace.firstChild);
+      }
+      gallerySpace.innerHTML = "";
+
+      // Reposiciona as imagens em uma grade
+      let columns = 12;
+      let margin = 10;
+      let isMobile = window.innerWidth <= 768; // Verifica se é um dispositivo móvel
+
+      if (isMobile) {
+        columns = 3;
+        margin = 10;
+        // Calculando a largura da galeria levando em conta a margem
+        gallerySpace.style.width = `${window.innerWidth - (2 * margin)}px`; // Subtrai a margem de ambos os lados
+      }
+      
+      const imageWidth = (galleryWidth - (columns + 1) * margin) / columns;
+      const imageHeight = imageWidth; // Mantém a proporção 4:3 para melhor responsividade
+
+      imageDetails.forEach(({ src, date, text }, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "Foto do casal";
+        img.style.width = `${imageWidth}px`;
+        img.style.height = `${imageHeight}px`;
+        img.style.position = "absolute";
+        img.style.cursor = "pointer";
+
+        const row = Math.floor(index / columns);
+        const col = index % columns;
+
+        img.style.left = `${col * (imageWidth + margin) + margin}px`;
+        img.style.top = `${row * (imageHeight + margin) + margin}px`;
+
+        img.addEventListener("click", () => {
+          cardImage.src = src;
+          cardText.innerText = text;
+          cardDate.innerText = date || "";
+          card.style.display = "block";
+        });
+
+        img.addEventListener("mouseover", () => {
+          if (heartButton.classList.contains("clicked")) {
+            img.style.transform = "scale(1)"; // Mantém a escala original
+          } else {
+            img.style.transform = "scale(1.2)"; // Ampliar no hover
+            img.style.zIndex = "100"; // Garante que a imagem fique acima das outras
+          }
+        });
+
+        img.addEventListener("mouseout", () => {
+          if (!heartButton.classList.contains("clicked")) {
+            img.style.transform = "scale(1)"; // Restaura a escala original
+            img.style.zIndex = "1"; // Restaura o z-index original
+          }
+        });
+
+        img.addEventListener("touchstart", (e) => {
+          e.preventDefault();
+          if (!heartButton.classList.contains("clicked")) {
+            img.style.transform = "scale(1.2)"; // Ampliar no touch
+            img.style.zIndex = "100"; // Garante que a imagem fique acima das outras
+          }
+        });
+
+        img.addEventListener("touchend", () => {
+          if (!heartButton.classList.contains("clicked")) {
+            img.style.transform = "scale(1)"; // Restaura a escala original
+            img.style.zIndex = "1"; // Restaura o z-index original
+          }
+        });
+
+        gallerySpace.appendChild(img);
+      });
+
+    }
+  
+    // Alternar entre os layouts ao clicar no botão
+    heartButton.addEventListener("click", () => {
+      isDynamicLayout = !isDynamicLayout;
+  
+      if (isDynamicLayout) {
+        initializeDynamicGallery();
+      } else {
+        initializeStaticGallery();
+      }
+    });
+  
+    // Inicializa com o layout dinâmico
+    initializeDynamicGallery();
+  });
