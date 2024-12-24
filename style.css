@@ -67,6 +67,7 @@ main {
     height: calc(100vh - 60px); /* Subtraindo a altura do header */
 }
 
+
 #heart-button{
     background: none;
     border: none;
@@ -74,9 +75,10 @@ main {
     font-size: 1.5em;
     color: #FF5A5F;
     transition: transform 0.3s ease-in-out;
+    -webkit-tap-highlight-color: transparent;
 }
 
-#heart-button:hover {
+#heart-button:hover{
     transform: scale(1.2);
 }
 
@@ -255,6 +257,10 @@ main {
     #close-button {
         font-size: 16px;
         padding: 10px 15px;
+    }
+
+    #heart-button:hover {
+        transform: scale(1.3);
     }
 }
 

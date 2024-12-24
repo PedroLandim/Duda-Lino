@@ -271,12 +271,6 @@ document.addEventListener("DOMContentLoaded", function () {
         img.style.left = `${col * (imageWidth + margin) + margin}px`;
         img.style.top = `${row * (imageHeight + margin) + margin}px`;
 
-        img.addEventListener("click", () => {
-          cardImage.src = src;
-          cardText.innerText = text;
-          cardDate.innerText = date || "";
-          card.style.display = "block";
-        });
 
         img.addEventListener("mouseover", () => {
           if (heartButton.classList.contains("clicked")) {
@@ -302,15 +296,36 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         });
 
-        img.addEventListener("touchend", () => {
+        img.addEventListener("touchend", (e) => {
           if (!heartButton.classList.contains("clicked")) {
             img.style.transform = "scale(1)"; // Restaura a escala original
             img.style.zIndex = "1"; // Restaura o z-index original
           }
+          // Trigger click event on touchend
+          img.click();
         });
 
-        gallerySpace.appendChild(img);
+        heartButton.addEventListener('touchstart', () => {
+          heartButton.style.transform = 'scale(1)'; // Aumenta o botão ao tocar
       });
+      
+        heartButton.addEventListener('touchend', () => {
+            heartButton.style.transform = 'scale(1)'; // Diminui o botão ao soltar o toque
+        });
+        
+        heartButton.addEventListener('touchcancel', () => {
+            heartButton.style.transform = 'scale(1)'; // Garante que o botão diminua se o toque for cancelado
+        });
+
+        img.addEventListener("click", () => {
+          cardImage.src = src;
+          cardText.innerText = text;
+          cardDate.innerText = date || "";
+          card.style.display = "block";
+        });
+
+          gallerySpace.appendChild(img);
+        });
 
     }
   
