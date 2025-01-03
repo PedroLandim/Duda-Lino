@@ -15,51 +15,53 @@ document.addEventListener("DOMContentLoaded", function () {
   // Lista de imagens
   const imageDetails = [
     { src: "img/img1.jpeg", date: "15 de Maio 2024", text: "Nossa primeira foto juntos, no Laguinho" },
-    { src: "img/img2.jpeg", text: "Lembra dessa viagem incrível?" },
-    { src: "img/img3.jpeg", text: "Essa foi uma noite especial para nós dois." },
-    { src: "img/img4.jpeg", text: "Um dia cheio de risadas e diversão." },
-    { src: "img/img5.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img6.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img7.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img8.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img9.jpeg", date: "28 de Junho 2024", text: "Reabrindo o pagode do Didi" },
-    { src: "img/img11.jpeg", date: "29 de Junho 2024", text: "Ela achando que iamos ficar milinários, mal sabia ela que eu já tinha ganhado na loteria" },
-    { src: "img/img12.jpeg", date: "29 de Junho 2024", text: "Primeira viagem para longe, Porto de Galinhas (eu, a Gatinha, Laís e Nicolly)" },
-    { src: "img/img13.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img14.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img15.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img16.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img17.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img18.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img19.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img20.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img21.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img22.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img23.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img24.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img25.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img26.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img27.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img28.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img29.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img30.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img31.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img32.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img33.jpeg", date: "1 de Junho 2024", text: "Provando Lingua de pato Bleeeergh" },
     { src: "img/img34.jpeg", date: "31 de Maio 2024", text: "Nosso primeiro Barchefe! (infelizmente os preços pipocaram pouco depois)" },
-    { src: "img/img35.jpeg", date: "8 de Junho 2024", text: "Uma maloqueira pulando o muro da federal. Despedida do Peludo" },
     { src: "img/img36.jpeg", date: "31 de Maio 2024", text: "Dois tabacudos testando óculos da Gucci" },
+    { src: "img/img33.jpeg", date: "1 de Junho 2024", text: "Provando Lingua de pato Bleeeergh" },
+    { src: "img/img35.jpeg", date: "8 de Junho 2024", text: "Uma maloqueira pulando o muro da federal. Despedida do Peludo" },
     { src: "img/img37.jpeg", date: "27 de Junho 2024", text: "Indo ali assistir divertidamente (nem namorava e já tirava ft de casal)" },
-    { src: "img/img38.jpeg", date: "27 de Maio 2024", text: "Segunda vez no Barchefe, esse a gnt aproveitou bastante o Clericot" },
-    { src: "img/img39.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img40.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img41.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img42.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img43.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img44.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img45.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img46.jpeg", text: "Nosso primeiro aniversário juntos!" },
-    { src: "img/img47.jpeg", text: "Nosso primeiro aniversário juntos!" },
+    { src: "img/img38.jpeg", date: "27 de Junho 2024", text: "Segunda vez no Barchefe, esse a gnt aproveitou bastante o Clericot" },
+    { src: "img/img9.jpeg", date: "28 de Junho 2024", text: "Reabrindo o pagode do Didi" },
+    { src: "img/img10.jpeg", date: "28 de Junho 2024", text: "Reabrindo o pagode do didi pt2" },
+    { src: "img/img12.jpeg", date: "29 de Junho 2024", text: "Primeira viagem para longe, Porto de Galinhas (eu, a Gatinha, Laís e Nicolly)" },
+    { src: "img/img11.jpeg", date: "29 de Junho 2024", text: "Ela achando que iamos ficar milinários, mal sabia ela que eu já tinha ganho na loteria" },
+    { src: "img/img13.jpeg", date: "16 de Julho 2024", text: "Primeira foto como namoradinhos" },
+    { src: "img/img39.jpeg", date: "16 de Julho 2024", text: "Rolezando no 1° dia de namoro no antigo" },
+    { src: "img/img42.jpeg", date: "20 de Julho 2024", text: "Posando pra a atividade da facul dela" },
+    { src: "img/img14.jpeg", date: "21 de Julho 2024", text: "A gnt pela UFPE agora podia beijar na frente do cac" },
+    { src: "img/img40.jpeg", date: "26 de Julho 2024", text: "Ft aleatória de casal" },
+    { src: "img/img45.jpeg", date: "27 de Julho 2024", text: "Acordando c meu amor" },
+    { src: "img/img41.jpeg", date: "27 de Julho 2024", text: "Indo na casa de Dodontes" },
+    { src: "img/img7.jpeg", date: "28 de Julho 2024", text: "Riomar dnv (dessa vez testando sofás kkkkkk)" },
+    { src: "img/img15.jpeg", date: "2 de Agosto 2024", text: "Um dia para o aniversário dela" },
+    { src: "img/img16.jpeg", date: "10 de Agosto 2024", text: "Esperando meu pai pro churras no Alphaville se vai ter comida? SDS" },
+    { src: "img/img43.jpeg", date: "10 de Agosto 2024", text: "Lá no Alphaville que lugar foda do carai" },
+    { src: "img/img20.jpeg", date: "16 de Agosto 2024", text: "Comemorando 1 mês no Lima, Cocina Peruana" },
+    { src: "img/img44.jpeg", date: "26 de Agosto 2024", text: "Ft brega no aniversário de Dodontes" },
+    { src: "img/img47.jpeg", date: "30 de Agosto 2024", text: "Pinto y mais pinto" },
+    { src: "img/img17.jpeg", date: "7 de Setembro 2024", text: "Estavamos arrumados pra ir pra algum canto" },
+    { src: "img/img18.jpeg", date: "7 de Setembro 2024", text: "Q mulher bonita da porra" },
+    { src: "img/img19.jpeg", date: "9 de Setembro 2024", text: "Rolê na Bodega chinesa (tem umas coisas escritas em chinês)" },
+    { src: "img/img21.jpeg", date: "9 de Setembro 2024", text: "Fomos bem atendidos e a comida tava top (9/10)" },
+    { src: "img/img22.jpeg", date: "14 de Setembro 2024", text: "Tem q ter foto queima ne kkkkk" },
+    { src: "img/img23.jpeg", date: "29 de Setembro 2024", text: "Primeira vez no Pedrosa/Indo pra exposição de animais" },
+    { src: "img/img24.jpeg", date: "5 de Outubro 2024", text: "Comemorando a vida no Ruizito Cocina Peruana" },
+    { src: "img/img25.jpeg", date: "12 de Outubro 2024", text: "Indo assistir 'A substáncia' (ela odiou)" },
+    { src: "img/img26.jpeg", date: "17 de Outubro 2024", text: "Comemorando 3 meses de namoro no Leite" },
+    { src: "img/img46.jpeg", date: "17 de Outubro 2024", text: "Comemorando 3 meses de namoro no Leite pt2" },
+    { src: "img/img28.jpeg", date: "26 de Outubro 2024", text: "Ela achando q eu fico legal com corte samurai" },
+    { src: "img/img27.jpeg", date: "26 de Outubro 2024", text: "Umas velhinhas estavam reclamando de mal cheiro no lugar... hmmm pq será?" },
+    { src: "img/img48.jpeg", date: "26 de Outubro 2024", text: "Sociopata no show da Priscila Senna" },
+    { src: "img/img29.jpeg", date: "1 de Novembro 2024", text: "Conhecendo o restante do 7k e indo pro BotecoCDU" },
+    { src: "img/img31.jpeg", date: "7 de Novembro 2024", text: "Tirei o dia para estressar ela" },
+    { src: "img/img5.jpeg", date: "9 de Novembro 2024", text: "Liambados" },
+    { src: "img/img8.jpeg", date: "9 de Novembro 2024", text: "Liambados/2" },
+    { src: "img/img6.jpeg", date: "13 de Novembro 2024", text: "Tirando ft com as roupas novas" },
+    { src: "img/img2.jpeg", date: "15 de Novembro 2024", text: "Foto estilo anos 70" },
+    { src: "img/img3.jpeg", date: "15 de Novembro 2024", text: "Aproveitando a Praia de Calhetas" },
+    { src: "img/img4.jpeg", date: "15 de Novembro 2024", text: "Aproveitando a Praia de Calhetas pt2" },
+    { src: "img/img30.jpeg", date: "17 de Novembro 2024", text: "De boa na Lagoa, tranquilos q nem dois esquilos" },
+    { src: "img/img32.jpeg", date: "27 de Novembro 2024", text: "Minutos atrás treinando o 'olha gente oq a gnt sabe fazer'" },
   ];
 
   const gallerySpace = document.querySelector(".gallery-space");
@@ -268,8 +270,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const row = Math.floor(index / columns);
         const col = index % columns;
 
-        img.style.left = `${col * (imageWidth + margin) + margin}px`;
-        img.style.top = `${row * (imageHeight + margin) + margin}px`;
+        img.style.left = `${(col * (imageWidth + margin) + margin)-5}px`;
+        img.style.top = `${(row * (imageHeight + margin) + margin)-5}px`;
 
 
         img.addEventListener("mouseover", () => {
@@ -289,25 +291,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         img.addEventListener("touchstart", (e) => {
-          e.preventDefault();
-          if (!heartButton.classList.contains("clicked")) {
-            img.style.transform = "scale(1.2)"; // Ampliar no touch
-            img.style.zIndex = "100"; // Garante que a imagem fique acima das outras
-          }
-        });
-
-        img.addEventListener("touchend", (e) => {
-          if (!heartButton.classList.contains("clicked")) {
-            img.style.transform = "scale(1)"; // Restaura a escala original
-            img.style.zIndex = "1"; // Restaura o z-index original
-          }
-          // Trigger click event on touchend
-          img.click();
+            img.style.transform = "scale(1)";
         });
 
         heartButton.addEventListener('touchstart', () => {
           heartButton.style.transform = 'scale(1)'; // Aumenta o botão ao tocar
-      });
+        });
       
         heartButton.addEventListener('touchend', () => {
             heartButton.style.transform = 'scale(1)'; // Diminui o botão ao soltar o toque
