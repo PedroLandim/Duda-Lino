@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     { src: "img/img22.jpeg", date: "14 de Setembro 2024", text: "Tem q ter foto queima ne kkkkk" },
     { src: "img/img23.jpeg", date: "29 de Setembro 2024", text: "Primeira vez no Pedrosa/Indo pra exposição de animais" },
     { src: "img/img24.jpeg", date: "5 de Outubro 2024", text: "Comemorando a vida no Ruizito Cocina Peruana" },
-    { src: "img/img25.jpeg", date: "12 de Outubro 2024", text: "Indo assistir 'A substáncia' (ela odiou)" },
+    { src: "img/img25.jpeg", date: "12 de Outubro 2024", text: "Indo assistir 'A substância' (ela odiou)" },
     { src: "img/img26.jpeg", date: "17 de Outubro 2024", text: "Comemorando 3 meses de namoro no Leite" },
     { src: "img/img46.jpeg", date: "17 de Outubro 2024", text: "Comemorando 3 meses de namoro no Leite pt2" },
     { src: "img/img28.jpeg", date: "26 de Outubro 2024", text: "Ela achando q eu fico legal com corte samurai" },
